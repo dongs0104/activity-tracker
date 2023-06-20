@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/prashantgupta24/activity-tracker/internal/pkg/handler"
-	"github.com/prashantgupta24/activity-tracker/pkg/activity"
-	"github.com/prashantgupta24/activity-tracker/pkg/system"
+	"github.com/dongs0104/activity-tracker/internal/pkg/handler"
+	"github.com/dongs0104/activity-tracker/pkg/activity"
+	"github.com/dongs0104/activity-tracker/pkg/system"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
@@ -23,7 +23,7 @@ func TestSuite(t *testing.T) {
 	suite.Run(t, new(TestTracker))
 }
 
-//Run once before all tests
+// Run once before all tests
 func (suite *TestTracker) SetupSuite() {
 	suite.activities = append(suite.activities, activity.MouseClick)
 	suite.activities = append(suite.activities, activity.MouseCursorMovement)
@@ -32,7 +32,7 @@ func (suite *TestTracker) SetupSuite() {
 	suite.activities = append(suite.activities, activity.MachineSleep)
 }
 
-//Run once before each test
+// Run once before each test
 func (suite *TestTracker) SetupTest() {
 	heartbeatInterval := 1 //second
 
@@ -44,7 +44,7 @@ func (suite *TestTracker) SetupTest() {
 }
 
 func (suite *TestTracker) TestTrackerValidateInterval() {
-	t := suite.T()
+	t := suite.Suite.T()
 
 	var tracker *Instance
 
@@ -109,7 +109,7 @@ func (suite *TestTracker) TestTrackerValidateInterval() {
 	assert.Equal(t, heartbeatInterval, workerInterval, "worker should match heartbeat since it is a test")
 }
 func (suite *TestTracker) TestDupHandlerRegistration() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 
 	tracker.StartWithHandlers(handler.TestHandler(),
@@ -119,7 +119,7 @@ func (suite *TestTracker) TestDupHandlerRegistration() {
 }
 
 func (suite *TestTracker) TestActivitiesOneByOne() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 
 	heartbeatCh := tracker.StartWithHandlers()
@@ -143,7 +143,7 @@ func (suite *TestTracker) TestActivitiesOneByOne() {
 }
 
 func (suite *TestTracker) TestActivitiesAllAtOnce() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 
 	heartbeatCh := tracker.StartWithHandlers()
@@ -167,7 +167,7 @@ func (suite *TestTracker) TestActivitiesAllAtOnce() {
 }
 
 func (suite *TestTracker) TestMultipleActivities() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 
 	heartbeatCh := tracker.StartWithHandlers()
@@ -196,7 +196,7 @@ func (suite *TestTracker) TestMultipleActivities() {
 	}
 }
 func (suite *TestTracker) TestTestHandler() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 
 	heartbeatCh := tracker.StartWithHandlers(handler.TestHandler())
@@ -213,7 +213,7 @@ func (suite *TestTracker) TestTestHandler() {
 }
 
 func (suite *TestTracker) TestTrackerStartAndQuit() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 
 	heartbeatCh := tracker.StartWithHandlers(handler.TestHandler())
@@ -245,7 +245,7 @@ func (suite *TestTracker) TestTrackerStartAndQuit() {
 }
 
 func (suite *TestTracker) TestValidateHandlers() {
-	t := suite.T()
+	t := suite.Suite.T()
 	machineSleepHandler := handler.MachineSleepHandler()
 
 	//case 1
@@ -265,7 +265,7 @@ func (suite *TestTracker) TestValidateHandlers() {
 }
 
 func (suite *TestTracker) TestValidateHandlersOnStart() {
-	t := suite.T()
+	t := suite.Suite.T()
 	machineSleepHandlerType := handler.MachineSleepHandler().Type()
 
 	tracker := suite.tracker
@@ -275,7 +275,7 @@ func (suite *TestTracker) TestValidateHandlersOnStart() {
 }
 
 func (suite *TestTracker) TestTrackerStateChange() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 	tracker.StartWithHandlers()
 
@@ -295,7 +295,7 @@ func (suite *TestTracker) TestTrackerStateChange() {
 }
 
 func (suite *TestTracker) TestTrackerStateChangeByValue() {
-	t := suite.T()
+	t := suite.Suite.T()
 	tracker := suite.tracker
 	tracker.StartWithHandlers()
 

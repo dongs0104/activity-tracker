@@ -8,7 +8,7 @@ Installation
 
 The library can be installed using:
 
-	go get -u github.com/prashantgupta24/activity-tracker
+	go get -u github.com/dongs0104/activity-tracker
 
 Usage
 
@@ -271,6 +271,6 @@ Corresponding handlers:
 
 Example
 
-Check out the example here : https://github.com/prashantgupta24/activity-tracker/blob/master/example/example.go
+Check out the example here : https://github.com/dongs0104/activity-tracker/blob/master/example/example.go
 */
 package main

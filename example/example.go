@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/prashantgupta24/activity-tracker/internal/pkg/logging"
-	"github.com/prashantgupta24/activity-tracker/pkg/tracker"
+	"github.com/dongs0104/activity-tracker/internal/pkg/logging"
+	"github.com/dongs0104/activity-tracker/pkg/tracker"
 )
 
 func main() {

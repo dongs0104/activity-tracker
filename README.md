@@ -1,12 +1,12 @@
 # Activity tracker
 
-[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go) [![codecov](https://codecov.io/gh/prashantgupta24/activity-tracker/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/activity-tracker) [![Go Report Card](https://goreportcard.com/badge/github.com/prashantgupta24/activity-tracker)](https://goreportcard.com/report/github.com/prashantgupta24/activity-tracker) [![version][version-badge]][RELEASES]
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go) [![codecov](https://codecov.io/gh/prashantgupta24/activity-tracker/branch/master/graph/badge.svg)](https://codecov.io/gh/prashantgupta24/activity-tracker) [![Go Report Card](https://goreportcard.com/badge/github.com/dongs0104/activity-tracker)](https://goreportcard.com/report/github.com/dongs0104/activity-tracker) [![version][version-badge]][RELEASES]
 
-It is a libary that lets you monitor certain activities on your machine, and then sends a [heartbeat](https://github.com/prashantgupta24/activity-tracker#heartbeat-struct) at a periodic (configurable) time detailing all the activity changes during that time. The activities that you want to track are monitored by **pluggable** handlers for those activities and can be added or removed according to your needs. An example of an activity is `MouseCursorActivity`, i.e. whether your mouse cursor was moved or not.
+It is a libary that lets you monitor certain activities on your machine, and then sends a [heartbeat](https://github.com/dongs0104/activity-tracker#heartbeat-struct) at a periodic (configurable) time detailing all the activity changes during that time. The activities that you want to track are monitored by **pluggable** handlers for those activities and can be added or removed according to your needs. An example of an activity is `MouseCursorActivity`, i.e. whether your mouse cursor was moved or not.
 
 ## Installation
 
-` go get -u github.com/prashantgupta24/activity-tracker`
+` go get -u github.com/dongs0104/activity-tracker`
 
 ## Usage
 
@@ -72,13 +72,13 @@ There are 2 primary configs required for the tracker to work:
 
 > The Interval at which you want the checks to happen within a heartbeat (default 60s).
 
-The activity tracker gives you a [heartbeat](https://github.com/prashantgupta24/activity-tracker#heartbeat-struct) object every 60 seconds, that is based on the `HeartbeatInterval`. But there is something else to understand here. In order for the tracker to know how many times an activity occured, like how many times you moved the cursor for example, it needs to query the mouse position every `x` seconds. That's where the `WorkerInterval` comes into play.
+The activity tracker gives you a [heartbeat](https://github.com/dongs0104/activity-tracker#heartbeat-struct) object every 60 seconds, that is based on the `HeartbeatInterval`. But there is something else to understand here. In order for the tracker to know how many times an activity occured, like how many times you moved the cursor for example, it needs to query the mouse position every `x` seconds. That's where the `WorkerInterval` comes into play.
 
 The `WorkerInterval` tells the tracker how frequently to check for an activity within a heartbeat. It does that by querying the handler associated with that activity. Let's say you want to know how many times the mouse cursor was moved within 60 seconds. You need to constantly ask the `mouseCursorHandler` every `x` seconds to see if the cursor moved. What you want to do is to start the tracker with the usual 60s `HeartbeatInterval `, configured with a `Mouse-cursor` handler. In this case, you set the `WorkerInterval` to 5 seconds. The tracker will then keep asking the mouse cursor handler every 5 seconds to see if there was a movement, and keep track each time there was a change. At the end of `HeartbeatInterval`, it will construct the `heartbeat` with all the changes and send it.
 
 For example, in the output that you saw above, it says `cursor-move times: 12`. That doesn't mean the cursor was moved only 12 times. Since the `WorkerInterval` was 5 seconds in the example, that means `cursorHandler` was asked every 5 seconds (i.e. 12 times in 60 seconds) whether the cursor moved. And it replied that the cursor had indeed moved everytime. 
 
-**Note :** This is applicable only to [pull-based handlers](https://github.com/prashantgupta24/activity-tracker#types-of-handlers). For push-based handlers, `WorkerInterval` does not matter.
+**Note :** This is applicable only to [pull-based handlers](https://github.com/dongs0104/activity-tracker#types-of-handlers). For push-based handlers, `WorkerInterval` does not matter.
 
 - If you want to know how many `times` an activity occured within a heartbeat, you might want to set the `WorkerInterval` to a low value, so that it keeps quering the handlers.
 
@@ -212,7 +212,7 @@ Thanks to [robotgo](https://github.com/go-vgo/robotgo) for making a lot of the h
 
 ## Example
 
-Check out the example [here](https://github.com/prashantgupta24/activity-tracker/blob/master/example/example.go)
+Check out the example [here](https://github.com/dongs0104/activity-tracker/blob/master/example/example.go)
 
 ## Projects using this library
 
@@ -220,4 +220,4 @@ Check out the example [here](https://github.com/prashantgupta24/activity-tracker
 
 
 [version-badge]: https://img.shields.io/github/release/prashantgupta24/activity-tracker.svg
-[RELEASES]: https://github.com/prashantgupta24/activity-tracker/releases
+[RELEASES]: https://github.com/dongs0104/activity-tracker/releases

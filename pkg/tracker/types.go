@@ -4,9 +4,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/prashantgupta24/activity-tracker/internal/pkg/handler"
-	"github.com/prashantgupta24/activity-tracker/pkg/activity"
-	"github.com/prashantgupta24/activity-tracker/pkg/system"
+	"github.com/dongs0104/activity-tracker/internal/pkg/handler"
+	"github.com/dongs0104/activity-tracker/pkg/activity"
+	"github.com/dongs0104/activity-tracker/pkg/system"
 )
 
 //Instance is an instance of the tracker

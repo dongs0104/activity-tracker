@@ -4,15 +4,15 @@ import (
 	"github.com/go-vgo/robotgo"
 )
 
-//Position is a struct for defining mouse position
+// Position is a struct for defining mouse position
 type Position struct {
 	MouseX int
 	MouseY int
 }
 
-//GetPosition gets the mouse position at this instant
+// GetPosition gets the mouse position at this instant
 func GetPosition() *Position {
-	x, y := robotgo.GetMousePos()
+	x, y := robotgo.Location()
 	return &Position{
 		MouseX: x,
 		MouseY: y,
